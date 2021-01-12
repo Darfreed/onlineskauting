@@ -5,8 +5,9 @@ from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
-from .models import Post, Challenge
+from .models import Post, Challenge_ZN, Challenge_SC, Challenge_PR
 from django.utils import timezone
+import datetime, math
 
 def index(request: HttpRequest) -> HttpResponse:
     return render(request, '../website/index.html', {})
@@ -21,10 +22,19 @@ class ProfileView(LoginRequiredMixin, TemplateView):
 
 class ChallengesView(LoginRequiredMixin, TemplateView):
     template_name = "accounts/challenges.html"
+
     def get(self, request, *args, **kwargs):
-        znalosti= Challenge.objects.filter(kategorie=1)
-        schopnosti= Challenge.objects.filter(kategorie=2)
-        pratelstvi= Challenge.objects.filter(kategorie=3)
+        time = datetime.datetime.now()
+        week = int(time.strftime("%V"))
+        zn_count = Challenge_ZN.objects.all().count()
+        zn_id = int((week / zn_count - math.floor(week / zn_count))*zn_count+1)
+        sc_count = Challenge_SC.objects.all().count()
+        sc_id = int((week / sc_count - math.floor(week / sc_count))*sc_count+1)
+        pr_count = Challenge_PR.objects.all().count()
+        pr_id = int((week / pr_count - math.floor(week / pr_count))*pr_count+1)
+        znalosti= Challenge_ZN.objects.filter(id=zn_id)
+        schopnosti= Challenge_SC.objects.filter(id=sc_id)
+        pratelstvi= Challenge_PR.objects.filter(id=pr_id)
         context = {
             'znalosti_list': znalosti,
             'schopnosti_list': schopnosti,
@@ -35,7 +45,7 @@ class ChallengesView(LoginRequiredMixin, TemplateView):
 class ForumView(LoginRequiredMixin, TemplateView):
     template_name = "accounts/forum.html" 
     def get(self, request, *args, **kwargs):
-        posts = Post.objects.all()
+        posts = Post.objects.filter(vyzva=False)
         context = {
             'post_list': posts,
         }

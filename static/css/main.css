@@ -66,3 +66,27 @@ textarea{
     height:auto;
     margin: 0 auto;
 }
+
+.nazev_vyzvy{
+    font-size: 1.5rem;
+    margin: 1rem;
+    margin-top: 2rem;
+}
+
+.divider-blue{
+    background-color: blue;
+}
+
+.divider-red{
+    background-color: red;
+}
+
+.divider-green{
+    background-color: green;
+}
+
+.splneno{
+    width: 3rem !important;
+    height: 3rem !important;
+    margin-bottom: 1rem;
+}

@@ -19,20 +19,38 @@
         <div class="row">
         {% for vyzva in znalosti_list %}
             <div class="col-lg-3 rounded bg-primary text-light vyzva">
-                <p class="pre-wrap lead autor">{{ vyzva.nazev }}</p>
+                <h3 class="pre-wrap lead nazev_vyzvy">{{ vyzva.nazev }}</h3>
+                <div class="divider-custom divider-blue">
+                    <div class="divider-custom-line"></div>
+                </div>
                 <p class="pre-wrap lead">{{ vyzva.text }}</p>
+                <i class="far fa-check-circle splneno"></i>
             </div>
         {% endfor %}
         {% for vyzva in schopnosti_list %}
             <div class="col-lg-3 rounded bg-primary text-light vyzva">
-                <p class="pre-wrap lead autor">{{ vyzva.nazev }}</p>
+                <h3 class="pre-wrap lead nazev_vyzvy">{{ vyzva.nazev }}</h3>
+                <div class="divider-custom divider-red">
+                    <div class="divider-custom-line"></div>
+                </div>
                 <p class="pre-wrap lead">{{ vyzva.text }}</p>
+                <i class="far fa-check-circle splneno"></i>
             </div>
         {% endfor %}
         {% for vyzva in pratelstvi_list %}
-            <div class="col-lg-3  rounded bg-primary text-light vyzva">
-                <p class="pre-wrap lead autor">{{ vyzva.nazev }}</p>
-                <p class="pre-wrap lead">{{ vyzva.text }}</p>
+            <div class="col-lg-3 vyzva rounded bg-primary text-light">
+                <div class="">
+                    <h3 class="pre-wrap lead nazev_vyzvy">{{ vyzva.nazev }}</h3>
+                    <div class="divider-custom divider-green">
+                        <div class="divider-custom-line"></div>
+                    </div>
+                    {% with profile=user.profile%}
+                    <p class="pre-wrap lead">{{ vyzva.text }}</p>
+                    {% if vyzva.splneno == profile.id %}
+                        <i class="far fa-fw fa-check-circle splneno"></i>
+                    {% endif%}
+                    {% endwith %}
+                </div>
             </div>
         {% endfor %}
         </div>

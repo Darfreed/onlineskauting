@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Výzvy{% endblock %}
+
+{% block content %}
+<section class="masthead page-section text-secondary mb-0" id="about">
+    <div class="container">
+        <!-- About Section Heading-->
+        <div class="text-center">
+            <h2 class="page-section-heading d-inline-block text-secondary">Výzvy</h2>
+        </div>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-secondary">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="far fa-grin-stars"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- About Section Content-->
+        <div class="row">
+        {% for vyzva in znalosti_list %}
+            <div class="col-lg-3 rounded bg-primary text-light vyzva">
+                <p class="pre-wrap lead autor">{{ vyzva.nazev }}</p>
+                <p class="pre-wrap lead">{{ vyzva.text }}</p>
+            </div>
+        {% endfor %}
+        {% for vyzva in schopnosti_list %}
+            <div class="col-lg-3 rounded bg-primary text-light vyzva">
+                <p class="pre-wrap lead autor">{{ vyzva.nazev }}</p>
+                <p class="pre-wrap lead">{{ vyzva.text }}</p>
+            </div>
+        {% endfor %}
+        {% for vyzva in pratelstvi_list %}
+            <div class="col-lg-3  rounded bg-primary text-light vyzva">
+                <p class="pre-wrap lead autor">{{ vyzva.nazev }}</p>
+                <p class="pre-wrap lead">{{ vyzva.text }}</p>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

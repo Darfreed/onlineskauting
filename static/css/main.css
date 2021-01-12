@@ -1,0 +1,68 @@
+.table td, .table th {
+    padding: 0rem;
+    vertical-align: middle;
+    border: 0
+}
+
+
+h2{
+    vertical-align: middle;
+}
+
+.rounded {
+    border-radius: 2rem !important;
+}
+
+.post{
+    padding-right: 1.5rem;
+    padding: 1rem;
+    padding-left: 2rem;
+    margin: 0 auto;
+}
+
+.post_list{
+    margin-bottom: 1rem;
+}
+
+.autor{
+    font-size: 1.5rem;
+}
+
+.vyzva{
+    text-align: center;
+    margin: 1rem auto;
+}
+
+.vyzva p {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 2rem;
+}
+
+.profile_list{
+    margin: 1rem;
+}
+
+.bio{
+    padding: 2rem;
+    
+}
+
+.avatar{
+    padding: 1rem;
+}
+
+.profile_block{
+    margin: 0 auto;
+    margin-bottom: 1rem;
+}
+
+.table{
+    margin-bottom: 0;
+}
+
+textarea{
+    width:100%; 
+    height:auto;
+    margin: 0 auto;
+}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Registrace{% endblock %}
+
+{% block content %}
+<section class="masthead page-section bg-primary text-white mb-0" id="about">
+    <div class="container">
+        <!-- About Section Heading-->
+        <div class="text-center">
+            <h2 class="page-section-heading d-inline-block">Registrace</h2>
+        </div>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="far fa-grin-stars"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- About Section Content-->
+        <div class="row">
+            <div class="col-lg-8 ml-auto">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Registrovat</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

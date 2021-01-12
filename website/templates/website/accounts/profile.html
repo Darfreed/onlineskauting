@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Profil{% endblock %}
+
+{% block content %}
+{% with profile=user.profile%}
+<section class="masthead page-section text-secondary mb-0">
+    <div class="container">
+        <!-- About Section Heading-->
+        <div class="text-center">
+            {% if profile %}
+                <h2 class="page-section-heading d-inline-block text-secondary">{{profile.nickname|default:""}}</h2>
+            {% else %}
+                <h2 class="page-section-heading d-inline-block text-secondary">{{user.username}}</h2>
+            {% endif %}
+        </div>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-secondary">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="far fa-grin-stars"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- About Section Content-->
+        <div class="row profile_list">
+            <div class="col-lg-5 ml-auto .profile_block">
+                <div class="rounded bg-primary text-light avatar">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td rowspan="10"><img src="{% static 'images/svetlusak.png' %}" class="img-fluid img-responsive" alt="SKAUT"></td>
+                                <td><img src="{% static 'images/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                <td><img src="{% static 'images/dot_red.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                <td><img src="{% static 'images/dot_green.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                            </tr>
+                            <tr>
+                                <td><img src="{% static 'images/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                <td><img src="{% static 'images/dot_red.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                <td><img src="{% static 'images/dot_green.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                            </tr>
+                            <tr>
+                                <td><img src="{% static 'images/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                <td><img src="{% static 'images/dot_red.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                <td><img src="{% static 'images/dot_green.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                            </tr>
+                            <tr>
+                                <td><img src="{% static 'images/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                <td><img src="{% static 'images/dot_grey.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                <td><img src="{% static 'images/dot_green.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                            </tr>
+                            <tr>
+                                <td><img src="{% static 'images/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                <td><img src="{% static 'images/dot_grey.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                <td><img src="{% static 'images/dot_grey.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                            </tr>
+                            <tr>
+                                <td><img src="{% static 'images/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                <td><img src="{% static 'images/dot_grey.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                <td><img src="{% static 'images/dot_grey.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                            </tr>
+                            <tr>
+                                <td><img src="{% static 'images/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                <td><img src="{% static 'images/dot_grey.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                <td><img src="{% static 'images/dot_grey.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                            </tr>
+                            <tr>
+                                <td><img src="{% static 'images/dot_grey.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                <td><img src="{% static 'images/dot_grey.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                <td><img src="{% static 'images/dot_grey.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                            </tr>
+                            <tr>
+                                <td><img src="{% static 'images/dot_grey.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                <td><img src="{% static 'images/dot_grey.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                <td><img src="{% static 'images/dot_grey.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                            </tr>
+                            <tr>
+                                <td><img src="{% static 'images/dot_grey.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                <td><img src="{% static 'images/dot_grey.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                <td><img src="{% static 'images/dot_grey.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-5 mr-auto .profile_block">
+                <div class="rounded bg-primary text-light bio">
+                    <p class="pre-wrap lead">{{ profile.bio|default:""}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endwith %}
+{% endblock %}

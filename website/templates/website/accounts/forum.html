@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Fórum{% endblock %}
+
+{% block content %}
+<section class="masthead page-section text-secondary mb-0" id="about">
+    <div class="container">
+        <!-- About Section Heading-->
+        <div class="text-center">
+            <h2 class="page-section-heading d-inline-block text-secondary">Fórum</h2>
+        </div>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-secondary">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="far fa-grin-stars"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- About Section Content-->
+        <div class="row post_list">
+            {% with profile=user.profile%}
+            {% if profile %}
+                <div class="col-lg-8 rounded bg-primary text-light post">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <textarea name="text" rows="2" cols="10"></textarea>
+                        <input type="hidden" id="autor" name="autor" value={{profile.id|default:""}}>
+                        <label for="vyzva">K výzvě</label>
+                        <input type="checkbox" id="vyzva" name="vyzva" value='True'>
+                        <button class="btn btn-outline-light btn-social mx-1" type="submit"><i class="fas fa-fw fa-comment"></i></i></button>
+                    </form>
+                </div>
+            {% endif %}
+            {% endwith %}
+        </div>
+        {% for post in post_list %}
+        <div class="row post_list">
+            <div class="col-lg-8 rounded bg-primary text-light post">
+                <p class="pre-wrap lead autor">{{ post.autor }}</p>
+                <p class="pre-wrap lead">{{ post.text }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

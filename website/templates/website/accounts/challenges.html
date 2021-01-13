@@ -3,6 +3,7 @@
 {% block title %}Výzvy{% endblock %}
 
 {% block content %}
+{% with profile=user.profile%}
 <section class="masthead page-section text-secondary mb-0" id="about">
     <div class="container">
         <!-- About Section Heading-->
@@ -24,7 +25,11 @@
                     <div class="divider-custom-line"></div>
                 </div>
                 <p class="pre-wrap lead">{{ vyzva.text }}</p>
-                <i class="far fa-check-circle splneno"></i>
+                {% for name in vyzva.splneno.all %}
+                    {% if name == profile.nickname %}
+                        <i class="far fa-fw fa-check-circle splneno"></i>
+                    {% endif %}
+                {% endfor %}
             </div>
         {% endfor %}
         {% for vyzva in schopnosti_list %}
@@ -34,7 +39,11 @@
                     <div class="divider-custom-line"></div>
                 </div>
                 <p class="pre-wrap lead">{{ vyzva.text }}</p>
-                <i class="far fa-check-circle splneno"></i>
+                {% for name in vyzva.splneno.all %}
+                    {% if name == profile.nickname %}
+                        <i class="far fa-fw fa-check-circle splneno"></i>
+                    {% endif %}
+                {% endfor %}
             </div>
         {% endfor %}
         {% for vyzva in pratelstvi_list %}
@@ -44,16 +53,17 @@
                     <div class="divider-custom divider-green">
                         <div class="divider-custom-line"></div>
                     </div>
-                    {% with profile=user.profile%}
                     <p class="pre-wrap lead">{{ vyzva.text }}</p>
-                    {% if vyzva.splneno == profile.id %}
-                        <i class="far fa-fw fa-check-circle splneno"></i>
-                    {% endif%}
-                    {% endwith %}
+                    {% for name in vyzva.splneno.all %}
+                        {% if name == profile.nickname %}
+                            <i class="far fa-fw fa-check-circle splneno"></i>
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         {% endfor %}
         </div>
     </div>
 </section>
+{% endwith %}
 {% endblock %}

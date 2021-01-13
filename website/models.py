@@ -23,7 +23,7 @@ class Post(models.Model):
         ordering = ['-datum']
 
 class Challenge_ZN(models.Model):
-    splněno = models.ManyToManyField(UserProfile,blank=True, null=True)
+    splneno = models.ManyToManyField(UserProfile)
     nazev = models.CharField(max_length=60)
     text = models.TextField()
 
@@ -31,7 +31,7 @@ class Challenge_ZN(models.Model):
         return self.nazev
 
 class Challenge_SC(models.Model):
-    splneno = models.ManyToManyField(UserProfile,blank=True, null=True)
+    splneno = models.ManyToManyField(UserProfile)
     nazev = models.CharField(max_length=60)
     text = models.TextField()
 
@@ -39,7 +39,7 @@ class Challenge_SC(models.Model):
         return self.nazev
 
 class Challenge_PR(models.Model):
-    splněno = models.ManyToManyField(UserProfile,blank=True, null=True)
+    splneno = models.ManyToManyField(UserProfile)
     nazev = models.CharField(max_length=60)
     text = models.TextField()
 

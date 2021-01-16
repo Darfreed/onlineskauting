@@ -10,6 +10,10 @@ from django.contrib.auth.models import User
 from .forms import RegisterForm
 import datetime, math
 
+from django import template
+register = template.Library()
+
+
 def index(request: HttpRequest) -> HttpResponse:
     return render(request, '../website/index.html', {})
 
@@ -19,19 +23,27 @@ class SignUpView(generic.CreateView):
     template_name = 'accounts/signup.html'
 
 class ProfileView(LoginRequiredMixin, TemplateView):
-    template_name = "accounts/profile.html"
-
+    template_name = "accounts/profile.html" 
     def get(self, request, *args, **kwargs):
-        challenge_list = Challenge.objects.all()
+        
+        username = None
+        if request.user.is_authenticated:
+            username = request.user.profile
+        challenges = Solving.objects.filter(is_solved=True, solved_by=username)
         category_list = Category.objects.all()
-        solved_list = Solving.objects.filter(is_solved=True)
-        x = Solving.objects.filter(id=1)
-        x |= Solving.objects.filter(id=2)
-        print(x)
+        challenge_count = [ 0, 0, 0, 0, 0]
+        i = 0 
+        while i < Category.objects.all().count():
+            j = 0
+            while j < Solving.objects.filter(is_solved=True, solved_by=username).count():
+                if Challenge.objects.filter(category=category_list[i].id,name=challenges[j].challenge).count() == 1:
+                    challenge_count[i] = challenge_count[i] + 1
+                j = j + 1
+            i = i + 1
+        print(challenge_count)
         context = {
-            'challenge_list':challenge_list,
-            'category_list':category_list,
-            'solved_list':solved_list,
+            'challenge_count':challenge_count,
+            'category_list':category_list
         }
         return render(request, self.template_name, context)
 
@@ -44,15 +56,14 @@ class ChallengesView(LoginRequiredMixin, TemplateView):
         challenge_list = Challenge.objects.none()
         category_list = Category.objects.all()
         solved_list = Solving.objects.filter(is_solved=True)
-        x = 0
-        while x < Category.objects.all().count():
-            in_category = Challenge.objects.filter(category=category_list[x].id)
-            in_category_count = Challenge.objects.filter(category=category_list[x].id).count()
+        i = 0
+        while i < Category.objects.all().count():
+            in_category = Challenge.objects.filter(category=category_list[i].id)
+            in_category_count = Challenge.objects.filter(category=category_list[i].id).count()
             challenge = int((week / in_category_count - math.floor(week / in_category_count))*in_category_count)
             challenge_id = in_category[challenge].id
             challenge_list |= Challenge.objects.filter(id=challenge_id)
-            x = x + 1
-            print(in_category_count,in_category[0],challenge_list)
+            i = i + 1
         context = {
             'challenge_list':challenge_list,
             'category_list':category_list,

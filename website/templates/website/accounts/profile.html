@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load mathfilters %}
+
 {% block title %}Profil{% endblock %}
 
 {% block content %}
@@ -27,69 +29,244 @@
                     <table class="table">
                         <tbody>
                             <tr>
-                                <td rowspan="10"><img src="{% static 'images/svetlusak.png' %}" class="img-fluid img-responsive" alt="SKAUT"></td>
+                                <td rowspan="10">
+                                    <img src="{% static 'images/avatar/sc_4.png' %}" class="schopnosti img-fluid img-responsive" alt="SKAUT">
+                                </td>
+                                <!-- Zjednodušení kódu-->
                                 {% for category in category_list %}
-
-                                    {% if category.color == "red" %}
-                                        <td><img src="{% static 'images/dot_red.png' %}" class="img-fluid img-responsive" alt="point"></td>
-                                    {% elif category.color == "blue" %}
-                                        <td><img src="{% static 'images/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
-                                    {% elif category.color == "green" %}
-                                        <td><img src="{% static 'images/dot_green.png' %}" class="img-fluid img-responsive" alt="point"></td>
-                                    {% endif %}
+                                    {% with index=category.id|sub:1 %}
+                                        {{ challenge_count.1 }}
+                                    {% endwith %}
                                 {% endfor %}
-                                {{ profile.id }}
-                            </tr>
-                            <tr>
+                                <!-- Zhoršení kódu-->
                                 {% for category in category_list %}
                                     {% if category.color == "red" %}
-                                        <td><img src="{% static 'images/dot_red.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% if challenge_count.0 > 0 %}
+                                            <td><img src="{% static 'images/dots/dot_red.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
                                     {% elif category.color == "blue" %}
-                                        <td><img src="{% static 'images/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% if challenge_count.1 > 0 %}
+                                            <td><img src="{% static 'images/dots/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
                                     {% elif category.color == "green" %}
-                                        <td><img src="{% static 'images/dot_green.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% if challenge_count.2 > 0 %}
+                                            <td><img src="{% static 'images/dots/dot_green.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
                                     {% endif %}
                                 {% endfor %}
                             </tr>
                             <tr>
-                                <td><img src="{% static 'images/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
-                                <td><img src="{% static 'images/dot_red.png' %}" class="img-fluid img-responsive" alt="point"></td>
-                                <td><img src="{% static 'images/dot_green.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                {% for category in category_list %}
+                                    {% if category.color == "red" %}
+                                        {% if challenge_count.0 > 1 %}
+                                            <td><img src="{% static 'images/dots/dot_red.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% elif category.color == "blue" %}
+                                        {% if challenge_count.1 > 1 %}
+                                            <td><img src="{% static 'images/dots/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% elif category.color == "green" %}
+                                        {% if challenge_count.2 > 1 %}
+                                            <td><img src="{% static 'images/dots/dot_green.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
                             </tr>
                             <tr>
-                                <td><img src="{% static 'images/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
-                                <td><img src="{% static 'images/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
-                                <td><img src="{% static 'images/dot_green.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                {% for category in category_list %}
+                                    {% if category.color == "red" %}
+                                        {% if challenge_count.0 > 2 %}
+                                            <td><img src="{% static 'images/dots/dot_red.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% elif category.color == "blue" %}
+                                        {% if challenge_count.1 > 2 %}
+                                            <td><img src="{% static 'images/dots/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% elif category.color == "green" %}
+                                        {% if challenge_count.2 > 2 %}
+                                            <td><img src="{% static 'images/dots/dot_green.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
                             </tr>
                             <tr>
-                                <td><img src="{% static 'images/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
-                                <td><img src="{% static 'images/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
-                                <td><img src="{% static 'images/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                {% for category in category_list %}
+                                    {% if category.color == "red" %}
+                                        {% if challenge_count.0 > 3 %}
+                                            <td><img src="{% static 'images/dots/dot_red.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% elif category.color == "blue" %}
+                                        {% if challenge_count.1 > 3 %}
+                                            <td><img src="{% static 'images/dots/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% elif category.color == "green" %}
+                                        {% if challenge_count.2 > 3 %}
+                                            <td><img src="{% static 'images/dots/dot_green.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
                             </tr>
                             <tr>
-                                <td><img src="{% static 'images/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
-                                <td><img src="{% static 'images/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
-                                <td><img src="{% static 'images/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                {% for category in category_list %}
+                                    {% if category.color == "red" %}
+                                        {% if challenge_count.0 > 4 %}
+                                            <td><img src="{% static 'images/dots/dot_red.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% elif category.color == "blue" %}
+                                        {% if challenge_count.1 > 4 %}
+                                            <td><img src="{% static 'images/dots/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% elif category.color == "green" %}
+                                        {% if challenge_count.2 > 4 %}
+                                            <td><img src="{% static 'images/dots/dot_green.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
                             </tr>
                             <tr>
-                                <td><img src="{% static 'images/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
-                                <td><img src="{% static 'images/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
-                                <td><img src="{% static 'images/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                {% for category in category_list %}
+                                    {% if category.color == "red" %}
+                                        {% if challenge_count.0 > 5 %}
+                                            <td><img src="{% static 'images/dots/dot_red.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% elif category.color == "blue" %}
+                                        {% if challenge_count.1 > 5 %}
+                                            <td><img src="{% static 'images/dots/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% elif category.color == "green" %}
+                                        {% if challenge_count.2 > 5 %}
+                                            <td><img src="{% static 'images/dots/dot_green.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
                             </tr>
                             <tr>
-                                <td><img src="{% static 'images/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
-                                <td><img src="{% static 'images/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
-                                <td><img src="{% static 'images/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                {% for category in category_list %}
+                                    {% if category.color == "red" %}
+                                        {% if challenge_count.0 > 6 %}
+                                            <td><img src="{% static 'images/dots/dot_red.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% elif category.color == "blue" %}
+                                        {% if challenge_count.1 > 6 %}
+                                            <td><img src="{% static 'images/dots/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% elif category.color == "green" %}
+                                        {% if challenge_count.2 > 6 %}
+                                            <td><img src="{% static 'images/dots/dot_green.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
                             </tr>
                             <tr>
-                                <td><img src="{% static 'images/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
-                                <td><img src="{% static 'images/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
-                                <td><img src="{% static 'images/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                {% for category in category_list %}
+                                    {% if category.color == "red" %}
+                                        {% if challenge_count.0 > 7 %}
+                                            <td><img src="{% static 'images/dots/dot_red.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% elif category.color == "blue" %}
+                                        {% if challenge_count.1 > 7 %}
+                                            <td><img src="{% static 'images/dots/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% elif category.color == "green" %}
+                                        {% if challenge_count.2 > 7 %}
+                                            <td><img src="{% static 'images/dots/dot_green.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
                             </tr>
                             <tr>
-                                <td><img src="{% static 'images/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
-                                <td><img src="{% static 'images/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
-                                <td><img src="{% static 'images/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                {% for category in category_list %}
+                                    {% if category.color == "red" %}
+                                        {% if challenge_count.0 > 8 %}
+                                            <td><img src="{% static 'images/dots/dot_red.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% elif category.color == "blue" %}
+                                        {% if challenge_count.1 > 8 %}
+                                            <td><img src="{% static 'images/dots/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% elif category.color == "green" %}
+                                        {% if challenge_count.2 > 8 %}
+                                            <td><img src="{% static 'images/dots/dot_green.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                                {% for category in category_list %}
+                                    {% if category.color == "red" %}
+                                        {% if challenge_count.0 > 9 %}
+                                            <td><img src="{% static 'images/dots/dot_red.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% elif category.color == "blue" %}
+                                        {% if challenge_count.1 > 9 %}
+                                            <td><img src="{% static 'images/dots/dot_blue.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% elif category.color == "green" %}
+                                        {% if challenge_count.2 > 9 %}
+                                            <td><img src="{% static 'images/dots/dot_green.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% else %}
+                                            <td><img src="{% static 'images/dots/dot_none.png' %}" class="img-fluid img-responsive" alt="point"></td>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
                             </tr>
                         </tbody>
                     </table>

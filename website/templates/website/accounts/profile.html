@@ -30,12 +30,83 @@
                         <tbody>
                             <tr>
                                 <td rowspan="10">
-                                    <img src="{% static 'images/avatar/sc_4.png' %}" class="schopnosti img-fluid img-responsive" alt="SKAUT">
+                                    <div class="parent">
+                                        {% if challenge_count.2 >= 10 %}
+                                            <img src="{% static 'images/avatar/pr_10.png' %}" class="background img-fluid img-responsive" alt="spolecnik10">
+                                        {% elif challenge_count.2 == 9 %}
+                                            <img src="{% static 'images/avatar/pr_9.png' %}" class="background img-fluid img-responsive" alt="spolecnik9">
+                                        {% elif challenge_count.2 == 8 %}
+                                            <img src="{% static 'images/avatar/pr_8.png' %}" class="background img-fluid img-responsive" alt="spolecnik8">
+                                        {% elif challenge_count.2 == 7 %}
+                                            <img src="{% static 'images/avatar/pr_7.png' %}" class="background img-fluid img-responsive" alt="spolecnik7">
+                                        {% elif challenge_count.2 == 6 %}
+                                            <img src="{% static 'images/avatar/pr_6.png' %}" class="background img-fluid img-responsive" alt="spolecnik6">
+                                        {% elif challenge_count.2 == 5 %}
+                                            <img src="{% static 'images/avatar/pr_5.png' %}" class="background img-fluid img-responsive" alt="spolecnik5">
+                                        {% elif challenge_count.2 == 4 %}
+                                            <img src="{% static 'images/avatar/pr_4.png' %}" class="background img-fluid img-responsive" alt="spolecnik4">
+                                        {% elif challenge_count.2 == 3 %}
+                                            <img src="{% static 'images/avatar/pr_3.png' %}" class="background img-fluid img-responsive" alt="spolecnik3">
+                                        {% elif challenge_count.2 == 2 %}
+                                            <img src="{% static 'images/avatar/pr_2.png' %}" class="background img-fluid img-responsive" alt="spolecnik2">
+                                        {% elif challenge_count.2 == 1 %}
+                                            <img src="{% static 'images/avatar/pr_1.png' %}" class="background img-fluid img-responsive" alt="spolecnik1">
+                                        {% else %}
+                                            <img src="{% static 'images/avatar/pr_0.png' %}" class="background img-fluid img-responsive" alt="spolecnik0">
+                                        {% endif %}
+
+                                        {% if challenge_count.0 >= 10 %}
+                                            <img src="{% static 'images/avatar/sc_10.png' %}" class="foreground img-fluid img-responsive" alt="zbran10">
+                                        {% elif challenge_count.0 == 9 %}
+                                            <img src="{% static 'images/avatar/sc_9.png' %}" class="foreground img-fluid img-responsive" alt="zbran9">
+                                        {% elif challenge_count.0 == 8 %}
+                                            <img src="{% static 'images/avatar/sc_8.png' %}" class="foreground img-fluid img-responsive" alt="zbran8">
+                                        {% elif challenge_count.0 == 7 %}
+                                            <img src="{% static 'images/avatar/sc_7.png' %}" class="foreground img-fluid img-responsive" alt="zbran7">
+                                        {% elif challenge_count.0 == 6 %}
+                                            <img src="{% static 'images/avatar/sc_6.png' %}" class="foreground img-fluid img-responsive" alt="zbran6">
+                                        {% elif challenge_count.0 == 5 %}
+                                            <img src="{% static 'images/avatar/sc_5.png' %}" class="foreground img-fluid img-responsive" alt="zbran5">
+                                        {% elif challenge_count.0 == 4 %}
+                                            <img src="{% static 'images/avatar/sc_4.png' %}" class="foreground img-fluid img-responsive" alt="zbran4">
+                                        {% elif challenge_count.0 == 3 %}
+                                            <img src="{% static 'images/avatar/sc_3.png' %}" class="foreground img-fluid img-responsive" alt="zbran3">
+                                        {% elif challenge_count.0 == 2 %}
+                                            <img src="{% static 'images/avatar/sc_2.png' %}" class="foreground img-fluid img-responsive" alt="zbran2">
+                                        {% elif challenge_count.0 == 1 %}
+                                            <img src="{% static 'images/avatar/sc_1.png' %}" class="foreground img-fluid img-responsive" alt="zbran1">
+                                        {% else %}
+                                            <img src="{% static 'images/avatar/sc_0.png' %}" class="foreground img-fluid img-responsive" alt="zbran0">
+                                        {% endif %}
+
+                                        {% if challenge_count.1 >= 10 %}
+                                            <img src="{% static 'images/avatar/zn_10.png' %}" class="foreground img-fluid img-responsive" alt="pokryvka10">
+                                        {% elif challenge_count.1 == 9 %}
+                                            <img src="{% static 'images/avatar/zn_9.png' %}" class="foreground img-fluid img-responsive" alt="pokryvka9">
+                                        {% elif challenge_count.1 == 8 %}
+                                            <img src="{% static 'images/avatar/zn_8.png' %}" class="foreground img-fluid img-responsive" alt="pokryvka8">
+                                        {% elif challenge_count.1 == 7 %}
+                                            <img src="{% static 'images/avatar/zn_7.png' %}" class="foreground img-fluid img-responsive" alt="pokryvka7">
+                                        {% elif challenge_count.1 == 6 %}
+                                            <img src="{% static 'images/avatar/zn_6.png' %}" class="foreground img-fluid img-responsive" alt="pokryvka6">
+                                        {% elif challenge_count.1 == 5 %}
+                                            <img src="{% static 'images/avatar/zn_5.png' %}" class="foreground img-fluid img-responsive" alt="pokryvka5">
+                                        {% elif challenge_count.1 == 4 %}
+                                            <img src="{% static 'images/avatar/zn_4.png' %}" class="foreground img-fluid img-responsive" alt="pokryvka4">
+                                        {% elif challenge_count.1 == 3 %}
+                                            <img src="{% static 'images/avatar/zn_3.png' %}" class="foreground img-fluid img-responsive" alt="pokryvka3">
+                                        {% elif challenge_count.1 == 2 %}
+                                            <img src="{% static 'images/avatar/zn_2.png' %}" class="foreground img-fluid img-responsive" alt="pokryvka2">
+                                        {% elif challenge_count.1 == 1 %}
+                                            <img src="{% static 'images/avatar/zn_1.png' %}" class="foreground img-fluid img-responsive" alt="pokryvka1">
+                                        {% else %}
+                                            <img src="{% static 'images/avatar/zn_0.png' %}" class="foreground img-fluid img-responsive" alt="spolecnik0">
+                                        {% endif %}
+                                    </div>
                                 </td>
                                 <!-- Zjednodušení kódu-->
                                 {% for category in category_list %}
                                     {% with index=category.id|sub:1 %}
-                                        {{ challenge_count.1 }}
                                     {% endwith %}
                                 {% endfor %}
                                 <!-- Zhoršení kódu-->

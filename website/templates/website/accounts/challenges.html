@@ -18,14 +18,26 @@
         </div>
         <!-- About Section Content-->
         <div class="row">
-        {% for vyzva in vyzva %}
-            <div class="col-lg-3 rounded bg-primary text-light vyzva">
-                <h3 class="pre-wrap lead nazev_vyzvy">{{ vyzva.name }}</h3>
-                <div class="divider-custom divider-red">
-                    <div class="divider-custom-line"></div>
-                </div>
-                <p class="pre-wrap lead">{{ vyzva.text }}</p>
-                <i class="far fa-fw fa-check-circle splneno"></i>
+        {% for challenge in challenge_list %}
+            <div class="col-lg-3 vyzva_list">
+            <div class="rounded bg-primary text-light vyzva">
+                <h3 class="pre-wrap lead nazev_vyzvy">{{ challenge.name }}</h3>
+                {% for category in category_list %}
+                    {% if challenge.category|stringformat:"s" == category.name %}
+                        <div class="divider-custom divider-{{ category.color }}">
+                            <div class="divider-custom-line"></div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <p class="pre-wrap lead">{{ challenge.text }}</p>
+                {% for solved in solved_list %}
+                    {% if solved.solved_by|stringformat:"s" == profile.nickname%}
+                        {% if solved.challenge|stringformat:"s" == challenge.name %}
+                            <i class="far fa-fw fa-check-circle splneno"></i>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
             </div>
         {% endfor %}
         </div>

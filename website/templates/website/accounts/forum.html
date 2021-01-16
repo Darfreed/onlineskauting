@@ -24,8 +24,6 @@
                         {% csrf_token %}
                         <textarea name="text" rows="2" cols="10"></textarea>
                         <input type="hidden" id="autor" name="autor" value={{profile.id|default:""}}>
-                        <label for="vyzva">Řešení výzvy</label>
-                        <input type="checkbox" id="vyzva" name="vyzva" value='True'>
                         <button class="btn btn-outline-light btn-social mx-1" type="submit"><i class="fas fa-fw fa-comment"></i></i></button>
                     </form>
                 </div>
@@ -35,8 +33,8 @@
         {% for post in post_list %}
         <div class="row post_list">
             <div class="col-lg-8 rounded bg-primary text-light post">
-                <p class="pre-wrap lead autor">{{ post.autor }}</p>
-                {{ post.datum }}
+                <p class="pre-wrap lead autor">{{ post.author }}</p>
+                {{ post.date }}
                 <p class="pre-wrap lead">{{ post.text }}</p>
             </div>
         </div>

@@ -28,9 +28,12 @@ h2{
     font-size: 1.5rem;
 }
 
+.vyzva_list{
+    margin: 0  auto;
+}
 .vyzva{
     text-align: center;
-    margin: 1rem auto;
+    padding: 0.5rem;
 }
 
 .vyzva p {

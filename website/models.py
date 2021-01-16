@@ -38,7 +38,7 @@ class Challenge(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=30)
-    color = models.CharField(max_length=60)
+    color = models.CharField(max_length=60,help_text="blue/red/green")
     
     def __str__(self):
         return self.name

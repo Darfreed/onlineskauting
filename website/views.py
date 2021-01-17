@@ -24,26 +24,22 @@ class SignUpView(generic.CreateView):
 
 class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = "accounts/profile.html" 
+
     def get(self, request, *args, **kwargs):
-        
         username = None
         if request.user.is_authenticated:
             username = request.user.profile
-        challenges = Solving.objects.filter(is_solved=True, solved_by=username)
+        challenges = Solving.objects.filter(solved_by=username).order_by('challenge__category__name', '-is_solved','challenge__id')
         category_list = Category.objects.all()
-        challenge_count = [ 0, 0, 0, 0, 0]
-        i = 0 
-        while i < Category.objects.all().count():
-            j = 0
-            while j < Solving.objects.filter(is_solved=True, solved_by=username).count():
-                if Challenge.objects.filter(category=category_list[i].id,name=challenges[j].challenge).count() == 1:
-                    challenge_count[i] = challenge_count[i] + 1
-                j = j + 1
-            i = i + 1
-        print(challenge_count)
+        znalosti_img='images/avatar/zn_'+str(Solving.objects.filter(is_solved=True,solved_by=username,challenge__category__name="Znalosti").count())+'.png'
+        schopnosti_img='images/avatar/sc_'+str(Solving.objects.filter(is_solved=True,solved_by=username,challenge__category__name="Schopnosti").count())+'.png'
+        pratelstvi_img='images/avatar/pr_'+str(Solving.objects.filter(is_solved=True,solved_by=username,challenge__category__name="Přátelství").count())+'.png'
         context = {
-            'challenge_count':challenge_count,
-            'category_list':category_list
+            'challenges': challenges,
+            'category_list': category_list,
+            'pratelstvi_img':pratelstvi_img,
+            'schopnosti_img':schopnosti_img,
+            'znalosti_img':znalosti_img
         }
         return render(request, self.template_name, context)
 
@@ -51,11 +47,13 @@ class ChallengesView(LoginRequiredMixin, TemplateView):
     template_name = "accounts/challenges.html"
 
     def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            username = request.user.profile
         time = datetime.datetime.now()
         week = int(time.strftime("%V"))
         challenge_list = Challenge.objects.none()
         category_list = Category.objects.all()
-        solved_list = Solving.objects.filter(is_solved=True)
+        solved_list = Solving.objects.filter(is_solved=True,solved_by=username)
         i = 0
         while i < Category.objects.all().count():
             in_category = Challenge.objects.filter(category=category_list[i].id)
@@ -73,6 +71,7 @@ class ChallengesView(LoginRequiredMixin, TemplateView):
 
 class ForumView(LoginRequiredMixin, TemplateView):
     template_name = "accounts/forum.html" 
+
     def get(self, request, *args, **kwargs):
         posts = Post.objects.all()
         context = {

@@ -24,7 +24,7 @@
                         {% csrf_token %}
                         <textarea name="text" rows="2" cols="10"></textarea>
                         <input type="hidden" id="autor" name="autor" value={{profile.id|default:""}}>
-                        <button class="btn btn-outline-light btn-social mx-1" type="submit"><i class="fas fa-fw fa-comment"></i></i></button>
+                        <button class="btn btn-outline-light btn-social mx-1" type="submit"><i class="fas fa-fw fa-comment"></i></button>
                     </form>
                 </div>
             {% endif %}
@@ -33,7 +33,9 @@
         {% for post in post_list %}
         <div class="row post_list">
             <div class="col-lg-8 rounded bg-primary text-light post">
-                <p class="pre-wrap lead autor">{{ post.author }}</p>
+                <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal0">
+                    <p class="pre-wrap lead autor">{{ post.author }}</p>
+                </div>
                 {{ post.date }}
                 <p class="pre-wrap lead">{{ post.text }}</p>
             </div>

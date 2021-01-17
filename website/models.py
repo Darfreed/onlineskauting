@@ -24,12 +24,23 @@ class UserProfile(models.Model):
 class Solving(models.Model):
     solved_by = models.ForeignKey("UserProfile", on_delete=models.CASCADE, related_name="solved_by")
     challenge = models.ForeignKey("Challenge", on_delete=models.CASCADE, related_name="challenge")
+    date = models.DateTimeField(default=timezone.now)
     is_solved = models.BooleanField(default=False)
     answer = models.TextField(blank=True, null=True)
+    
+    def __str__(self):
+        if self.is_solved:
+            solved = "Vyhodnoceno"
+        else:
+            solved = "Nevyhodnoceno"
+        return solved+' - '+self.solved_by.nickname+' - '+self.challenge.name
+
+    class Meta:
+        ordering = ['is_solved','-date']
 
 class Challenge(models.Model):
     author = models.ForeignKey("UserProfile", on_delete=models.CASCADE, related_name="author", default=1)
-    name = models.CharField(max_length=60)
+    name = models.CharField(max_length=60,unique=True)
     text = models.TextField()
     category = models.ForeignKey("Category", on_delete=models.CASCADE, related_name="category")
 

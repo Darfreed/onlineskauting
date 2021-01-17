@@ -39,7 +39,6 @@ h2{
 .vyzva p {
     margin-top: 1rem;
     margin-bottom: 1rem;
-    padding-bottom: 2rem;
 }
 
 .profile_list{
@@ -91,7 +90,6 @@ textarea{
 .splneno{
     width: 3rem !important;
     height: 3rem !important;
-    margin-bottom: 1rem;
 }
 
 .background {
@@ -108,4 +106,24 @@ textarea{
 
 .parent{
     position: relative;
+}
+
+.divider-profil{
+    margin: 0 !important;
+}
+
+.text-red{
+    color: red;
+}
+
+.text-green{
+    color: green;
+}
+
+.text-blue{
+    color: blue;
+}
+
+.solved-dot{
+    font-size: 30px;
 }

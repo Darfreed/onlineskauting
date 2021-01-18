@@ -20,10 +20,9 @@
             {% with profile=user.profile%}
             {% if profile %}
                 <div class="col-lg-8 rounded bg-primary text-light post">
-                    <form method="POST">
+                    <form method="POST" class="forum-form">
                         {% csrf_token %}
-                        <textarea name="text" rows="2" cols="10"></textarea>
-                        <input type="hidden" id="autor" name="autor" value={{profile.id|default:""}}>
+                        {{ form }}
                         <button class="btn btn-outline-light btn-social mx-1" type="submit"><i class="fas fa-fw fa-comment"></i></button>
                     </form>
                 </div>
@@ -37,7 +36,7 @@
                     <p class="pre-wrap lead autor">{{ post.author }}</p>
                 </div>
                 {{ post.date }}
-                <p class="pre-wrap lead">{{ post.text }}</p>
+                <p class="pre-wrap lead">{{ post.post }}</p>
             </div>
         </div>
         {% endfor %}

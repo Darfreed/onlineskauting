@@ -4,11 +4,11 @@ from django.contrib.auth.models import User
 
 class Post(models.Model):
     author = models.ForeignKey("UserProfile", on_delete=models.CASCADE, related_name="post")
-    text = models.TextField(help_text='Napište zprávu.')
+    post = models.TextField(help_text='Napiš něco...')
     date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.text
+        return self.post
     
     class Meta:
         ordering = ['-date']

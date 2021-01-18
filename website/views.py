@@ -5,9 +5,9 @@ from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
-from .models import Post, Challenge, Category, Solving
+from .models import Post, Challenge, Category, Solving, UserProfile
 from django.contrib.auth.models import User
-from .forms import RegisterForm
+from .forms import RegisterForm, PostForm, UserProfileForm, SolvingForm
 import datetime, math
 
 from django import template
@@ -34,19 +34,37 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         znalosti_img='images/avatar/zn_'+str(Solving.objects.filter(is_solved=True,solved_by=username,challenge__category__name="Znalosti").count())+'.png'
         schopnosti_img='images/avatar/sc_'+str(Solving.objects.filter(is_solved=True,solved_by=username,challenge__category__name="Schopnosti").count())+'.png'
         pratelstvi_img='images/avatar/pr_'+str(Solving.objects.filter(is_solved=True,solved_by=username,challenge__category__name="Přátelství").count())+'.png'
+        my_record = UserProfile.objects.get(user=request.user)
+        form = UserProfileForm(instance=my_record)
         context = {
             'challenges': challenges,
             'category_list': category_list,
             'pratelstvi_img':pratelstvi_img,
             'schopnosti_img':schopnosti_img,
-            'znalosti_img':znalosti_img
+            'znalosti_img':znalosti_img,
+            'form':form
         }
         return render(request, self.template_name, context)
+    
+    def profile(self, request):
+        my_record = UserProfile.objects.get(user=request.user)
+        form = UserProfileForm(request.POST, instance=my_record)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+
+            bio = form.cleaned_data['bio']
+            form = UserProfileForm()
+            return redirect(self.template_name)
+        
+        args = {'form':form,'bio':bio}
+        return render(request, self.template_name, args)
 
 class ChallengesView(LoginRequiredMixin, TemplateView):
     template_name = "accounts/challenges.html"
 
     def get(self, request, *args, **kwargs):
+        form = SolvingForm()
         if request.user.is_authenticated:
             username = request.user.profile
         time = datetime.datetime.now()
@@ -65,16 +83,47 @@ class ChallengesView(LoginRequiredMixin, TemplateView):
         context = {
             'challenge_list':challenge_list,
             'category_list':category_list,
-            'solved_list':solved_list
+            'solved_list':solved_list,
+            'form':form
         }
         return render(request, self.template_name, context)
+
+    def post(self, request):
+        form = SolvingForm(request.POST)
+        if form.is_valid():
+            solving = form.save(commit=False)
+            post.author = request.user.profile
+            solving.save()
+
+            text = form.cleaned_data['solving']
+            form = PostForm()
+            return redirect(self.template_name)
+        
+        args = {'form':form,'text':text}
+        return render(request, self.template_name, args)
 
 class ForumView(LoginRequiredMixin, TemplateView):
     template_name = "accounts/forum.html" 
 
     def get(self, request, *args, **kwargs):
+        form = PostForm()
         posts = Post.objects.all()
         context = {
             'post_list': posts,
+            'form':form,
         }
         return render(request, self.template_name, context)
+
+    def post(self, request):
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user.profile
+            post.save()
+
+            text = form.cleaned_data['post']
+            form = PostForm()
+            return redirect(self.template_name)
+        
+        args = {'form':form,'text':text}
+        return render(request, self.template_name, args)

@@ -63,10 +63,23 @@ h2{
     margin-bottom: 0;
 }
 
-textarea{
+.forum-form textarea{
     width:100%; 
-    height:auto;
+    height:4rem;
     margin: 0 auto;
+}
+
+.profile-form textarea{
+    width:100%;
+    margin: 0 auto;
+}
+
+.profile-form label{
+    display: none;
+}
+
+.forum-form label{
+    display: none;
 }
 
 .nazev_vyzvy{

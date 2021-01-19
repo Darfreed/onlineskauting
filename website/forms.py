@@ -30,4 +30,4 @@ class UserProfileForm(forms.ModelForm):
 class SolvingForm(forms.ModelForm):
     class Meta:
         model = Solving
-        fields = ('answer','challenge')
+        fields = ('answer',)

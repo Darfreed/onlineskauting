@@ -30,37 +30,7 @@
                         {% endif %}
                     {% endfor %}
                     <p class="pre-wrap lead">{{ challenge.text }}</p>
-                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal0">
-                        <button class="btn btn-outline-light btn-social mx-1" type="submit"><i class="fas fa-fw fa-comment"></i></button>
-                    </div>
-                    <div class="portfolio-modal modal fade" id="portfolioModal0" tabindex="-1" role="dialog" aria-labelledby="#portfolioModal0Label" aria-hidden="true">
-                        <div class="modal-dialog modal-xl" role="document">
-                            <div class="modal-content">
-                                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-times"></i></span></button>
-                                <div class="modal-body text-center">
-                                    <div class="container">
-                                        <div class="row justify-content-center">
-                                            <div class="col-lg-8">
-                                                <!-- Portfolio Modal - Title-->
-                                                <h2 class="portfolio-modal-title text-secondary mb-0">{{ challenge.name }}</h2>
-                                                <!-- Icon Divider-->
-                                                <div class="divider-custom">
-                                                    <div class="divider-custom-line"></div>
-                                                    <div class="divider-custom-icon"><i class="far fa-grin-stars"></i></div>
-                                                    <div class="divider-custom-line"></div>
-                                                </div>
-                                                <form class="profile-form">
-                                                {{ form }}
-                                                <button class="btn btn-danger" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Zrušit</button>
-                                                <button class="btn btn-success" type="submit"><i class="fas fa-fw fa-edit"></i>Upravit</button>
-                                                <form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     {% for solved in solved_list %}
                         {% if solved.challenge|stringformat:"s" == challenge.name %}
                             <i class="far fa-fw fa-check-circle splneno"></i>
@@ -71,6 +41,18 @@
                 </div>
             </div>
         {% endfor %}
+        </div>
+        <div class="col-lg-8 rounded bg-primary text-light challenges-form">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form }}
+                <select id="challenge" name="challenge">
+                    {% for challenge in challenge_list %}
+                        <option value="{{challenge.id}}">{{challenge.name}}</option>
+                    {% endfor %}
+                </select>
+                <button class="btn btn-outline-light btn-social mx-1" type="submit"><i class="fas fa-fw fa-comment"></i></button>
+            </form>
         </div>
     </div>
 </section>

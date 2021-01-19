@@ -46,7 +46,7 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         }
         return render(request, self.template_name, context)
     
-    def profile(self, request):
+    def post(self, request):
         my_record = UserProfile.objects.get(user=request.user)
         form = UserProfileForm(request.POST, instance=my_record)
         if form.is_valid():
@@ -64,6 +64,7 @@ class ChallengesView(LoginRequiredMixin, TemplateView):
     template_name = "accounts/challenges.html"
 
     def get(self, request, *args, **kwargs):
+        
         form = SolvingForm()
         if request.user.is_authenticated:
             username = request.user.profile
@@ -92,14 +93,15 @@ class ChallengesView(LoginRequiredMixin, TemplateView):
         form = SolvingForm(request.POST)
         if form.is_valid():
             solving = form.save(commit=False)
-            post.author = request.user.profile
+            solving.solved_by = request.user.profile
+            solving.challenge = form.challenge
             solving.save()
 
-            text = form.cleaned_data['solving']
+            challenge = form.cleaned_data['solving']
             form = PostForm()
             return redirect(self.template_name)
         
-        args = {'form':form,'text':text}
+        args = {'form':form,'challenge':challenge}
         return render(request, self.template_name, args)
 
 class ForumView(LoginRequiredMixin, TemplateView):

@@ -44,8 +44,6 @@
                             {% if challenge.challenge.category|stringformat:"s" == category.name %}
                                 {% if challenge.is_solved %}
                                     <span class="text-{{ category.color }} solved-dot">&#x25cf;</span>
-                                {% else %}
-                                    <span class="text-secondary solved-dot">&#x25cf;</span>
                                 {% endif %}
                             {% endif %}
                         {% endfor %}
@@ -80,10 +78,11 @@
                                                     <div class="divider-custom-icon"><i class="far fa-grin-stars"></i></div>
                                                     <div class="divider-custom-line"></div>
                                                 </div>
-                                                <form class="profile-form">
-                                                {{ form }}
-                                                <button class="btn btn-danger" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Zrušit</button>
-                                                <button class="btn btn-success" type="submit"><i class="fas fa-fw fa-edit"></i>Upravit</button>
+                                                <form action="" method="post" class="profile-form">
+                                                    {% csrf_token %}
+                                                    {{ form }}
+                                                    <button class="btn btn-danger" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Zrušit</button>
+                                                    <button class="btn btn-success" type="submit"><i class="fas fa-fw fa-edit"></i>Upravit</button>
                                                 <form>
                                             </div>
                                         </div>

@@ -30,7 +30,7 @@
                         {% endif %}
                     {% endfor %}
                     <p class="pre-wrap lead">{{ challenge.text }}</p>
-                    
+                    <p><button type="button" class="btn btn-secondary resit" data-id="{{ challenge.id }}">Vyřešit</button></p>
                     {% for solved in solved_list %}
                         {% if solved.challenge|stringformat:"s" == challenge.name %}
                             <i class="far fa-fw fa-check-circle splneno"></i>
@@ -43,18 +43,25 @@
         {% endfor %}
         </div>
         <div class="col-lg-8 rounded bg-primary text-light challenges-form">
-            <form method="POST">
+            <form method="POST" id="vyzva_form">
                 {% csrf_token %}
                 {{ form }}
-                <select id="challenge" name="challenge">
-                    {% for challenge in challenge_list %}
-                        <option value="{{challenge.id}}">{{challenge.name}}</option>
-                    {% endfor %}
-                </select>
                 <button class="btn btn-outline-light btn-social mx-1" type="submit"><i class="fas fa-fw fa-comment"></i></button>
             </form>
         </div>
     </div>
 </section>
 {% endwith %}
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(function(){
+            $('#vyzva_form').hide();
+            $('button.resit').on('click', function() {
+                $('#id_challenge').val($(this).data('id'));
+                $('#vyzva_form').show();
+            });
+        });
+    </script>
 {% endblock %}

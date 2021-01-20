@@ -28,6 +28,7 @@ class UserProfileForm(forms.ModelForm):
         fields = ('nickname','bio',)
 
 class SolvingForm(forms.ModelForm):
+    challenge = forms.CharField(widget=forms.HiddenInput())
     class Meta:
         model = Solving
         fields = ('answer',)

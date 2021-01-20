@@ -32,9 +32,7 @@
         {% for post in post_list %}
         <div class="row post_list">
             <div class="col-lg-8 rounded bg-primary text-light post">
-                <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal0">
-                    <p class="pre-wrap lead autor">{{ post.author }}</p>
-                </div>
+                <p class="pre-wrap lead autor">{{ post.author }}</p>
                 {{ post.date }}
                 <p class="pre-wrap lead">{{ post.post }}</p>
             </div>

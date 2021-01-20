@@ -47,14 +47,12 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         return render(request, self.template_name, context)
     
     def post(self, request):
-        my_record = UserProfile.objects.get(user=request.user)
-        form = UserProfileForm(request.POST, instance=my_record)
+        profil = UserProfile.objects.get(user=request.user)
+        form = UserProfileForm(request.POST, instance=profil)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.save()
+            profil.save()
 
             bio = form.cleaned_data['bio']
-            form = UserProfileForm()
             return redirect(self.template_name)
         
         args = {'form':form,'bio':bio}
@@ -92,16 +90,15 @@ class ChallengesView(LoginRequiredMixin, TemplateView):
     def post(self, request):
         form = SolvingForm(request.POST)
         if form.is_valid():
+
             solving = form.save(commit=False)
             solving.solved_by = request.user.profile
-            solving.challenge = form.challenge
+            solving.challenge = Challenge.objects.get(pk=form.cleaned_data['challenge'])
             solving.save()
 
-            challenge = form.cleaned_data['solving']
-            form = PostForm()
             return redirect(self.template_name)
         
-        args = {'form':form,'challenge':challenge}
+        args = {'form':form}
         return render(request, self.template_name, args)
 
 class ForumView(LoginRequiredMixin, TemplateView):
